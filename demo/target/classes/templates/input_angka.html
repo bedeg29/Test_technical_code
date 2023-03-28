@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<!--<div th:replace="fragments :: header"></div>-->
+<label for="input-number">Masukkan sebuah bilangan:</label>
+<input type="number" id="input-number">
+<button onclick="generatePrimeNumbers()">Generate Bilangan Prima</button>
+<button onclick="generateOddNumbers()">Generate bilangan Ganjil</button>
+
+
+<table id="prime-numbers-table">
+    <thead>
+    <tr>
+        <th>Result</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    function isPrimeNumber(num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (var i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function generatePrimeNumbers() {
+        var inputNumber = document.querySelector('#input-number').value;
+        var primeNumbers = [];
+        for (var i = 2; i <= inputNumber; i++) {
+            if (isPrimeNumber(i)) {
+                primeNumbers.push(i);
+            }
+        }
+
+        var tableBody = document.querySelector('#prime-numbers-table tbody');
+        tableBody.innerHTML = '';
+
+        for (var i = 0; i < primeNumbers.length; i++) {
+            var row = document.createElement('tr');
+            var cell = document.createElement('td');
+            cell.textContent = primeNumbers[i];
+            row.appendChild(cell);
+            tableBody.appendChild(row);
+        }
+    }
+
+    function generateOddNumbers() {
+        var inputNumber = document.querySelector('#input-number').value;
+        var oddNumbers = [];
+        for (var i = 1; i <= inputNumber; i += 2) {
+            oddNumbers.push(i);
+        }
+
+        var tableBody = document.querySelector('#prime-numbers-table tbody');
+        tableBody.innerHTML = '';
+
+        for (var i = 0; i < oddNumbers.length; i++) {
+            var row = document.createElement('tr');
+            var cell = document.createElement('td');
+            cell.textContent = oddNumbers[i];
+            row.appendChild(cell);
+            tableBody.appendChild(row);
+        }
+    }
+</script>
+</body>
+</body>
+</html>
